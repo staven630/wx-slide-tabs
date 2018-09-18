@@ -21,6 +21,17 @@ wxml
 	<view slot="slide-tab-3">h3</view>
 </slide-tabs>
 ```
+js 
+```
+Page({
+	onChange: function(e) {
+		console.log(e)
+	},
+	onSwitch: function(e) {
+		console.log(e)
+	}
+})
+```
 
 ### 参数
 | 选项名 | 类型 | 是否必填 | 默认值 | 描述 |
@@ -33,6 +44,6 @@ wxml
 
 ### 事件
 | 选项名 | 类型 | 是否必填 | 描述 |
-| :---  | :--- | :--- | :--- | :--- |
+| :---  | :--- | :--- | :--- |
 | bindchangeTab | Function | false | 监听tabs栏点击切换事件 |
 | bindswitchTab | Function | false | 监听内容区滑动事件 |
