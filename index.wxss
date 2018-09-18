@@ -1,0 +1,92 @@
+.b-line {
+	position: relative;
+}
+
+.b-line::before {
+	content: '';
+	position: absolute;
+	width: 200%;
+	height: 200%;
+	transform: scale(0.5);
+	transform-origin: 0 0;
+	pointer-events: none;
+	box-sizing: border-box;
+	border: 0 solid #e0e0e0;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 1000;
+}
+
+.b-line::before {
+	border-bottom-width: 1px;
+}
+
+.slide-tabs-container {
+	width: 100%;
+}
+
+.slide-tabs {
+	box-sizing: border-box;
+	background-color: #fafafa;
+	white-space: nowrap;
+}
+
+.noscroll-tabs {
+	display: flex;
+}
+
+.slide-tab {
+	display: flex;
+	font-size: 16px;
+	color: #505050;
+	position: relative;
+	height: 100%;
+	height: 96rpx;
+}
+
+.scroll-tabs .slide-tab {
+	display: inline-block;
+	padding: 0 20rpx;
+}
+
+.noscroll-tabs .slide-tab {
+	flex: 1;
+}
+
+.slide-tab view {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.slide-tab.active {
+	color: #33ac37;
+}
+
+.slide-tab view:after {
+	content: '';
+	display: block;
+	position: absolute;
+	height: 6rpx;
+	background-color: #33ac37;
+	bottom: 0;
+	left: 50%;
+	right: 50%;
+	transition: all 0.3s ease-in-out;
+	z-index: 200;
+}
+
+.slide-tab.active view:after {
+	left: 15%;
+	right: 15%;
+}
+
+.tab-view {
+	height: 100%;
+}
+
+
+

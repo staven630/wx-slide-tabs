@@ -1,0 +1,26 @@
+<view class="slide-tabs-container">
+	<scroll-view scroll-x="{{true}}" scroll-left="{{sl}}" scroll-with-animation="{{true}}" wx:if="{{slide}}" class="slide-tabs scroll-tabs b-line"
+	 style="height: {{th}}rpx; width: 100%;">
+		<view wx:for="{{tabs}}" wx:key="{{index}}" class="{{currentTab == index ? 'slide-tab active' : 'slide-tab'}}"
+		 data-tab="{{index}}" bindtap="changeTab">
+			<view>{{item}}</view>
+		</view>
+	</scroll-view>
+	<scroll-view wx:if="{{!slide}}">
+		<view class="slide-tabs noscroll-tabs b-line" style="height: {{th}}rpx">
+			<view wx:for="{{tabs}}" wx:key="{{index}}" class="{{currentTab == index ? 'slide-tab active' : 'slide-tab'}}"
+			 data-tab="{{index}}" bindtap="changeTab">
+				<view>{{item}}</view>
+			</view>
+		</view>
+	</scroll-view>
+	<view class="slide-tabs-content">
+		<swiper class="slide-tab-swiper" current="{{currentTab}}" circular="{{loop}}" duration="300" bindchange="switchTab" style="height: {{ sh }}rpx">
+			<swiper-item wx:for="{{tabs}}" wx:key="{{index}}" style="height: {{ sh }}rpx">
+				<scroll-view scroll-y="true" class="slide-tab-view" style="height: {{ sh }}rpx">
+					<slot name="slide-tab-{{index + 1}}"></slot>
+				</scroll-view>
+			</swiper-item>
+		</swiper>
+	</view>
+</view>
