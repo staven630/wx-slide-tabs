@@ -47,3 +47,13 @@ Page({
 | :---  | :--- | :--- | :--- |
 | bindchangeTab | Function | false | 监听tabs栏点击切换事件 |
 | bindswitchTab | Function | false | 监听内容区滑动事件 |
+
+### 注意事项
+&emsp;&emsp;当参数slide为true，tabs出现滚动的时候，出现了滚动条，可以在全局或引入组件的页面添加如下样式隐藏滚动条
+```
+::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+	color: transparent;
+}
+```
