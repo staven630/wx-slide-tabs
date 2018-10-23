@@ -1,5 +1,7 @@
 # slide-tabs
-> 类似可滑动的新闻菜单栏
+> 类似可滑动的新闻菜单栏，支持tab栏点击自动滑动到视图区以及内容区侧滑
+
+![slide-tabs](https://github.com/staven630/miniprogram-slide-tabs/blob/master/miniprogram-slide-tabs.gif "slide-tabs")
 
 ### 引入
 ```
