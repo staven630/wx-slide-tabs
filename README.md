@@ -59,3 +59,6 @@ Page({
 	color: transparent;
 }
 ```
+
+# 其他小程序插件
+* [miniprogram-city-picker:小程序城市选择器， 省市区三级联动](https://github.com/staven630/miniprogram-city-picker)
