@@ -57,8 +57,6 @@ Component({
     this.distanceMap = distanceMap;
   },
 
-  attached() {},
-
   data: {
     left: 0,
     currentTab: 0,
