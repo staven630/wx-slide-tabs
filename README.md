@@ -3,7 +3,23 @@
 
 ![slide-tabs](https://github.com/staven630/miniprogram-slide-tabs/blob/master/miniprogram-slide-tabs.gif "slide-tabs")
 
-### 引入
+### 加入项目
+* npm下载
+
+```
+npm i -S miniprogram-slide-tabs
+```
+使用
+```
+{
+  "usingComponents": {
+    "slide-tabs": "/components/miniprogram-slide-tabs/index"
+  }
+}
+```
+
+* 手动下载组件到项目components目录
+使用
 ```
 {
   "usingComponents": {

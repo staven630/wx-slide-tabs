@@ -1,0 +1,20 @@
+{
+  "name": "miniprogram-slide-tabs",
+  "version": "0.0.1",
+  "description": "> 类似可滑动的新闻菜单栏，支持tab栏点击自动滑动到视图区以及内容区侧滑",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/staven630/miniprogram-slide-tabs.git"
+  },
+  "keywords": [],
+  "author": "staven <20287710@qq.com> (http://github.com/staven630)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/staven630/miniprogram-slide-tabs/issues"
+  },
+  "homepage": "https://github.com/staven630/miniprogram-slide-tabs#readme"
+}
