@@ -13,7 +13,7 @@ npm i -S miniprogram-slide-tabs
 ```
 {
   "usingComponents": {
-    "slide-tabs": "/components/miniprogram-slide-tabs/index"
+    "slide-tabs": "miniprogram-slide-tabs"
   }
 }
 ```
