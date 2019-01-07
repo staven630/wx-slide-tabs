@@ -1,105 +1,90 @@
 const SYSTEM_INFO = wx.getSystemInfoSync();
-const IS_IPHONEX = SYSTEM_INFO.model.search('iPhone X') != -1;
-const vw = SYSTEM_INFO.windowWidth;
-const vh = SYSTEM_INFO.windowHeight;
-const wh = vh / vw * 750;
-const hw = vw / 2;
+const vh = SYSTEM_INFO.windowHeight / SYSTEM_INFO.windowWidth * 750;
+const pos = SYSTEM_INFO.windowWidth / 2;
 
 Component({
-	options: {
-		multipleSlots: true
-	},
-	properties: {
-		// 内容区是否衔接滑动
-		loop: {
+  options: {
+    multipleSlots: true
+  },
+  properties: {
+    
+		loop: { // 内容区是否衔接滑动
 			type: Boolean,
 			value: false
 		},
-		// tab栏是否可滑动
-		slide: {
-			type: Boolean,
-			value: false
-		},
-		// tab栏目标题
-		tabs: {
-			type: Array,
-			value: []
-		},
-		// tab栏高度
-		tabHeight: {
-			type: Number,
-			value: 96,
-			observer: function (newVal) {
-				const winHeight = this.data.winHeight;
-				let params = {};
-				if (typeof newVal !== 'number') {
-					params.th = 96;
-					params.sh = winHeight - 96;
-				} else {
-					params.th = newVal;
-					params.sh = winHeight - newVal;
-				}
-				params.sh = IS_IPHONEX ? params.sh - 68 : params.sh;
-				this.setData(params);
-			}
-		},
-		// slide-tabs高度
-		winHeight: {
-			type: Number,
-			value: wh,
-			observer: function (newVal) {
-				const tabHeight = this.data.tabHeight;
-				let params = {};
-				params.th = tabHeight;
-				params.sh = typeof newVal !== 'number' ? vh - tabHeight : newVal - tabHeight;
-				params.sh = IS_IPHONEX ? params.sh - 68 : params.sh;
-				this.setData(params);
-			}
-		}
-	},
 
-	data: {
-		th: 96,
-		sh: IS_IPHONEX ? wh - 164 : wh - 96,
-		currentTab: 0,
-		sl: 0
-	},
+    slidable: {
+      // tab栏是否可滑动
+      type: Boolean,
+      value: false
+    },
 
-	externalClasses: ['slide-tabs-class'],
-	
-	ready() {
-		const that = this;
-		const query = wx.createSelectorQuery().in(this);
-		query.selectAll('.slide-tab').boundingClientRect(function(res) {
-			that.lList = [];
-			let num = 0;
-			res.forEach((item, index) => {
-				that.lList.push(num + item.width / 2);
-				num += item.width;
-			});
-		}).exec()
-	},
+    tabs: {
+      // tabs栏标题
+      type: Array,
+      value: []
+    },
 
-	methods: {
-		changeTab(e) {
-			const index = +e.currentTarget.dataset.tab;
-			this.setData({
-				currentTab: index,
-				sl: this.lList[index] - hw
-			}, () => {
-				this.triggerEvent('changeTab', e.detail);
-			});
-		},
+    tabheight: {
+      type: Number,
+      value: 96
+    },
+    height: { // 整个组件的高度
+      type: Number,
+      value: null,
+      observer: function(newVal) {
+        console.log(vh)
+        newVal = typeof newVal === 'undefined' ? vh : newVal;
+        this.setData({
+          wh: newVal
+        })
+      }
+    }
+  },
 
-		switchTab(e) {
-			const index = +e.detail.current;
-			const len = this.data.tabs.length;
-			this.setData({
-				currentTab: index,
-				sl: this.lList[index] - hw
-			}, () => {
-				this.triggerEvent('switchTab', e.detail);
-			});
-		}
-	}
+  ready() {
+    if (!this.properties.slidable) return;
+    const distanceMap = new Map();
+    const query = wx.createSelectorQuery().in(this);
+    query.selectAll('.slide-tabs-tab')
+      .boundingClientRect(res => {
+        let num = 0;
+        res.forEach((item, index) => {
+          distanceMap.set(index, num + item.width / 2);
+          num += item.width;
+        })
+      }).exec();
+    this.distanceMap = distanceMap;
+  },
+
+  attached() {},
+
+  data: {
+    left: 0,
+    currentTab: 0,
+    wh: vh
+  },
+
+  methods: {
+    getParams(index) {
+      return this.properties.slidable ? {
+        currentTab: index,
+        left: this.distanceMap.get(index) - pos
+      } : {currentTab: index};
+    },
+
+    changeTab(e) {
+      const index = +e.currentTarget.dataset.index;
+      this.setData(this.getParams(index));
+    },
+    switchTab(e) {
+      const index = +e.detail.current;
+      this.setData(this.getParams(index), () => {
+        this.triggerEvent('change', {
+          index: index,
+          tab: this.data.tabs[index] 
+        })
+      });
+    }
+  }
 })
