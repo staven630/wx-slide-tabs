@@ -62,7 +62,7 @@ Page({
 
 
 ### 注意事项
-&emsp;&emsp;当参数slide为true，tabs出现滚动的时候，出现了滚动条，可以在全局或引入组件的页面添加如下样式隐藏滚动条
+&emsp;&emsp;如果在某些场景下，当参数slide为true，tabs出现滚动的时候，出现了滚动条，可以在引入组件的页面或特定标签中添加如下样式隐藏滚动条
 ```
 ::-webkit-scrollbar {
 	width: 0;
