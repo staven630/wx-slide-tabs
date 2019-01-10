@@ -7,7 +7,7 @@
 * npm下载
 
 ```
-npm i -S wx-slide-tabs
+npm i -S miniprogram-slide-tabs
 ```
 使用
 ```
