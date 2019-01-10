@@ -1,19 +1,19 @@
 # slide-tabs
 > 类似可滑动的新闻菜单栏，支持tab栏点击自动滑动到视图区以及内容区侧滑
 
-![slide-tabs](https://github.com/staven630/miniprogram-slide-tabs/blob/master/miniprogram-slide-tabs.gif "slide-tabs")
+![slide-tabs](https://github.com/staven630/wx-slide-tabs/blob/master/wx-slide-tabs.gif "slide-tabs")
 
 ### 加入项目
 * npm下载
 
 ```
-npm i -S miniprogram-slide-tabs
+npm i -S wx-slide-tabs
 ```
 使用
 ```
 {
   "usingComponents": {
-    "slide-tabs": "miniprogram-slide-tabs"
+    "slide-tabs": "wx-slide-tabs"
   }
 }
 ```
@@ -23,7 +23,7 @@ npm i -S miniprogram-slide-tabs
 ```
 {
   "usingComponents": {
-    "slide-tabs": "/components/miniprogram-slide-tabs/index"
+    "slide-tabs": "/components/wx-slide-tabs/index"
   }
 }
 ```
@@ -72,4 +72,4 @@ Page({
 ```
 
 # 其他小程序插件
-* [miniprogram-city-picker:小程序城市选择器， 省市区三级联动](https://github.com/staven630/miniprogram-city-picker)
+* [wx-city-picker:小程序城市选择器， 省市区三级联动](https://github.com/staven630/wx-city-picker)
