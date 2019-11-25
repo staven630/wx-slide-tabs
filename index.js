@@ -82,13 +82,16 @@ Component({
     },
 
     getParams(index) {
-      if (Object.keys(this.distanceMap).length === 0) {
-        this.initMap(false);
+      if (this.properties.slidable) {
+        if (Object.keys(this.distanceMap).length === 0) {
+          this.initMap(false);
+        }
+        return {
+          currentTab: index,
+          left: this.distanceMap[index] - pos
+        }
       }
-      return this.properties.slidable ? {
-        currentTab: index,
-        left: this.distanceMap.get(index) - pos
-      } : { currentTab: index };
+      return { currentTab: index };
     },
 
     changeTab(e) {
