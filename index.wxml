@@ -1,18 +1,24 @@
-<view class="slide-tabs">
-  <scroll-view scroll-x="{{true}}" scroll-left="{{left}}" scroll-with-animation="{{true}}" wx:if="{{slidable}}" class="slide-tabs-scroll scroll b-line" style="height: {{tabheight}}rpx;">
-    <view wx:for="{{tabs}}" wx:key="{{index}}" class="{{currentTab == index ? 'slide-tabs-tab active' : 'slide-tabs-tab'}}" data-index="{{index}}" bindtap="changeTab">
+<view class="slide-tabs" style="background-color: {{backgroundColor}};">
+  <scroll-view scroll-x="{{true}}" scroll-left="{{left}}" scroll-with-animation="{{true}}" wx:if="{{slidable}}"
+    class="slide-tabs-scroll scroll b-line" style="height: {{tabheight}}rpx;">
+    <view wx:for="{{tabs}}" wx:key="{{index}}"
+      class="{{currentTab == index ? 'slide-tabs-tab active' : 'slide-tabs-tab'}}" data-index="{{index}}"
+      bindtap="changeTab">
       <view>{{item.title ? item.title : item}}</view>
     </view>
   </scroll-view>
   <scroll-view wx:if="{{!slidable}}">
     <view class="slide-tabs-scroll no-scroll b-line" style="height: {{tabheight}}rpx">
-      <view wx:for="{{tabs}}" wx:key="{{index}}" class="{{currentTab == index ? 'slide-tabs-tab active' : 'slide-tabs-tab'}}" data-index="{{index}}" bindtap="changeTab">
+      <view wx:for="{{tabs}}" wx:key="{{index}}"
+        class="{{currentTab == index ? 'slide-tabs-tab active' : 'slide-tabs-tab'}}" data-index="{{index}}"
+        bindtap="changeTab">
         <view>{{item.title ? item.title : item}}</view>
       </view>
     </view>
   </scroll-view>
   <view class="slide-tabs-content">
-    <swiper class="slide-tab-swiper" current="{{currentTab}}" circular="{{loop}}" duration="300" bindchange="switchTab" style="height: {{ wh -tabheight }}rpx">
+    <swiper class="slide-tab-swiper" current="{{currentTab}}" circular="{{loop}}" duration="300" bindchange="switchTab"
+      style="height: {{ wh -tabheight }}rpx">
       <swiper-item wx:for="{{tabs}}" wx:key="{{index}}">
         <scroll-view scroll-y="true" class="slide-tab-view" style="height: {{ wh -tabheight }}rpx">
           <slot name="slide-tab-{{index + 1}}"></slot>

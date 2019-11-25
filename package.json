@@ -1,6 +1,6 @@
 {
   "name": "wx-slide-tabs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "> 类似可滑动的新闻菜单栏，支持tab栏点击自动滑动到视图区以及内容区侧滑",
   "main": "index.js",
   "scripts": {

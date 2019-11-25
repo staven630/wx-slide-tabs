@@ -7,11 +7,14 @@ Component({
     multipleSlots: true
   },
   properties: {
-    
-		loop: { // 内容区是否衔接滑动
-			type: Boolean,
-			value: false
-		},
+    backgroundColor: {
+      type: String,
+      value: '#f5f5f5'
+    },
+    loop: { // 内容区是否衔接滑动
+      type: Boolean,
+      value: false
+    },
 
     slidable: {
       // tab栏是否可滑动
@@ -32,8 +35,7 @@ Component({
     height: { // 整个组件的高度
       type: Number,
       value: null,
-      observer: function(newVal) {
-        console.log(vh)
+      observer: function (newVal) {
         newVal = typeof newVal === 'undefined' ? vh : newVal;
         this.setData({
           wh: newVal
@@ -42,19 +44,10 @@ Component({
     }
   },
 
-  ready() {
-    if (!this.properties.slidable) return;
-    const distanceMap = new Map();
-    const query = wx.createSelectorQuery().in(this);
-    query.selectAll('.slide-tabs-tab')
-      .boundingClientRect(res => {
-        let num = 0;
-        res.forEach((item, index) => {
-          distanceMap.set(index, num + item.width / 2);
-          num += item.width;
-        })
-      }).exec();
-    this.distanceMap = distanceMap;
+  lifetimes: {
+    ready() {
+      this.initMap();
+    }
   },
 
   data: {
@@ -64,11 +57,38 @@ Component({
   },
 
   methods: {
+    initMap(delay = true) {
+      if (!this.properties.slidable) return;
+      this.distanceMap = {};
+      if (delay) {
+        setTimeout(() => {
+          this.getQuery();
+        }, 2000)
+      } else {
+        this.getQuery();
+      }
+    },
+
+    getQuery() {
+      const query = wx.createSelectorQuery().in(this);
+      query.selectAll('.slide-tabs-tab')
+        .boundingClientRect(res => {
+          let num = 0;
+          res.forEach((item, index) => {
+            this.distanceMap[index] = num + item.width / 2;
+            num += item.width;
+          })
+        }).exec();
+    },
+
     getParams(index) {
+      if (Object.keys(this.distanceMap).length === 0) {
+        this.initMap(false);
+      }
       return this.properties.slidable ? {
         currentTab: index,
         left: this.distanceMap.get(index) - pos
-      } : {currentTab: index};
+      } : { currentTab: index };
     },
 
     changeTab(e) {
@@ -80,7 +100,7 @@ Component({
       this.setData(this.getParams(index), () => {
         this.triggerEvent('change', {
           index: index,
-          tab: this.data.tabs[index] 
+          tab: this.data.tabs[index]
         })
       });
     }
